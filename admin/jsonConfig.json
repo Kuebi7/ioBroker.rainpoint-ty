@@ -1,0 +1,105 @@
+{
+    "type": "panel",
+    "i18n": true,
+    "items": {
+        "header": {
+            "type": "header",
+            "text": "RainPoint-TY",
+            "size": 2
+        },
+        "sessionHint": {
+            "type": "staticText",
+            "newLine": true,
+            "text": "sessionHint",
+            "xs": 12,
+            "sm": 12,
+            "md": 12,
+            "lg": 12
+        },
+        "email": {
+            "type": "text",
+            "label": "email",
+            "newLine": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+        },
+        "password": {
+            "type": "password",
+            "label": "password",
+            "visible": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+        },
+        "countryCode": {
+            "type": "select",
+            "label": "countryCode",
+            "help": "countryCodeHelp",
+            "default": "43",
+            "options": [
+                { "label": "Österreich (43)", "value": "43" },
+                { "label": "Deutschland (49)", "value": "49" },
+                { "label": "Schweiz (41)", "value": "41" },
+                { "label": "Niederlande (31)", "value": "31" },
+                { "label": "USA / Kanada (1)", "value": "1" }
+            ],
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+        },
+        "region": {
+            "type": "select",
+            "label": "region",
+            "default": "EU",
+            "options": [
+                { "value": "EU", "label": "Europa" },
+                { "value": "AZ", "label": "Amerika" },
+                { "value": "IN", "label": "Indien" },
+                { "value": "CN", "label": "China" }
+            ],
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+        },
+        "homeIndex": {
+            "type": "number",
+            "label": "homeIndex",
+            "help": "homeIndexHelp",
+            "min": 0,
+            "max": 20,
+            "default": 0,
+            "newLine": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+        },
+        "pollInterval": {
+            "type": "number",
+            "label": "pollInterval",
+            "min": 30,
+            "max": 600,
+            "default": 60,
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+        },
+        "defaultDuration": {
+            "type": "number",
+            "label": "defaultDuration",
+            "min": 1,
+            "max": 60,
+            "default": 10,
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 4
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "RainPoint-TY": "RainPoint-TY",
+    "sessionHint": "Only one cloud session per account. Use a dedicated member account so the phone app stays logged in. App: RainPoint-TY, not RainPoint Home.",
+    "email": "Email",
+    "password": "Password",
+    "countryCode": "Country calling code",
+    "countryCodeHelp": "Country used when the RainPoint-TY account was created",
+    "region": "Cloud region",
+    "homeIndex": "Home index",
+    "homeIndexHelp": "0 = first home (often the shared home)",
+    "pollInterval": "Poll interval (seconds)",
+    "defaultDuration": "Default watering duration (minutes)"
+}

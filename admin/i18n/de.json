@@ -1,0 +1,13 @@
+{
+    "RainPoint-TY": "RainPoint-TY",
+    "sessionHint": "Nur eine Cloud-Session pro Konto. Extra-Mitgliedskonto verwenden, damit die Handy-App eingeloggt bleibt. App: RainPoint-TY, nicht RainPoint Home.",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "countryCode": "Ländervorwahl",
+    "countryCodeHelp": "Land beim Anlegen des RainPoint-TY-Kontos",
+    "region": "Cloud-Region",
+    "homeIndex": "Home-Index",
+    "homeIndexHelp": "0 = erstes Home (oft das geteilte Home)",
+    "pollInterval": "Abfrageintervall (Sekunden)",
+    "defaultDuration": "Standard-Bewässerungsdauer (Minuten)"
+}

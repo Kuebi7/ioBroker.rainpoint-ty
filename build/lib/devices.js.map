@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/lib/devices.ts"],
+  "sourcesContent": ["import { SOCKET_PRODUCT_IDS } from './constants';\n\nexport function sanitizeId(value: string): string {\n    const cleaned = value.replace(/[^a-zA-Z0-9_-]/g, '_');\n    return cleaned || 'device';\n}\n\nexport function isIrrigationDevice(deviceType: string, name: string, productId: string): boolean {\n    if (SOCKET_PRODUCT_IDS.has(productId) || /socket/i.test(name)) {\n        return false;\n    }\n    return deviceType === 'HTV' || deviceType === 'HIS' || deviceType === 'HCC';\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,uBAAmC;AAE5B,SAAS,WAAW,OAAuB;AAC9C,QAAM,UAAU,MAAM,QAAQ,mBAAmB,GAAG;AACpD,SAAO,WAAW;AACtB;AAEO,SAAS,mBAAmB,YAAoB,MAAc,WAA4B;AAC7F,MAAI,oCAAmB,IAAI,SAAS,KAAK,UAAU,KAAK,IAAI,GAAG;AAC3D,WAAO;AAAA,EACX;AACA,SAAO,eAAe,SAAS,eAAe,SAAS,eAAe;AAC1E;",
+  "names": []
+}

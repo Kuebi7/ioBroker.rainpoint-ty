@@ -1,0 +1,109 @@
+{
+    "common": {
+        "name": "rainpoint-ty",
+        "version": "0.1.0",
+        "news": {
+            "0.1.0": {
+                "en": "Initial release: RainPoint-TY cloud login, device discovery and valve control",
+                "de": "Erstes Release: RainPoint-TY-Cloud-Login, Geräteerkennung und Ventilsteuerung"
+            }
+        },
+        "titleLang": {
+            "en": "RainPoint-TY irrigation",
+            "de": "RainPoint-TY Bewässerung",
+            "ru": "RainPoint-TY irrigation",
+            "pt": "RainPoint-TY irrigation",
+            "nl": "RainPoint-TY irrigation",
+            "fr": "RainPoint-TY irrigation",
+            "it": "RainPoint-TY irrigation",
+            "es": "RainPoint-TY irrigation",
+            "pl": "RainPoint-TY irrigation",
+            "uk": "RainPoint-TY irrigation",
+            "zh-cn": "RainPoint-TY irrigation"
+        },
+        "desc": {
+            "en": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "de": "RainPoint-TY-(Tuya-)Bewässerungsventile über die RainPoint-TY-Cloud-API in ioBroker einbinden",
+            "ru": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "pt": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "nl": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "fr": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "it": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "es": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "pl": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "uk": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
+            "zh-cn": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API"
+        },
+        "authors": ["Andreas"],
+        "keywords": ["rainpoint", "rainpoint-ty", "tuya", "irrigation", "garden", "watering"],
+        "licenseInformation": {
+            "license": "MIT",
+            "type": "free"
+        },
+        "platform": "Javascript/Node.js",
+        "mode": "daemon",
+        "icon": "rainpoint-ty.svg",
+        "extIcon": "https://raw.githubusercontent.com/Kuebi7/ioBroker.rainpoint-ty/main/admin/rainpoint-ty.svg",
+        "readme": "https://github.com/Kuebi7/ioBroker.rainpoint-ty/blob/main/README.md",
+        "loglevel": "info",
+        "tier": 3,
+        "adminUI": {
+            "config": "json"
+        },
+        "type": "garden",
+        "compact": true,
+        "enabled": true,
+        "connectionType": "cloud",
+        "dataSource": "poll",
+        "osDependencies": {
+            "linux": [],
+            "darwin": [],
+            "win32": []
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=5.0.19"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=6.17.12"
+            }
+        ]
+    },
+    "native": {
+        "email": "",
+        "password": "",
+        "countryCode": "43",
+        "region": "EU",
+        "homeIndex": 0,
+        "pollInterval": 60,
+        "defaultDuration": 10
+    },
+    "encryptedNative": ["password"],
+    "protectedNative": ["password"],
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Connected to RainPoint-TY cloud",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
+}

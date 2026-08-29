@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/lib/constants.ts"],
+  "sourcesContent": ["export const DEVICE_TYPE_CONTROLLER = 'HCC';\nexport const DEVICE_TYPE_SENSOR = 'HCS';\nexport const DEVICE_TYPE_VALVE = 'HTV';\nexport const DEVICE_TYPE_GATEWAY = 'HWG';\nexport const DEVICE_TYPE_WATER_STATION = 'HWS';\nexport const DEVICE_TYPE_IRRIGATION = 'HIS';\nexport const DEVICE_TYPE_HUB_DEVICE = 'HIC';\nexport const DEVICE_TYPE_HUB_TIMER = 'HTP';\n\nexport const SOCKET_PRODUCT_IDS = new Set(['upavlp996ferbht7']);\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,yBAAyB;AAC/B,MAAM,qBAAqB;AAC3B,MAAM,oBAAoB;AAC1B,MAAM,sBAAsB;AAC5B,MAAM,4BAA4B;AAClC,MAAM,yBAAyB;AAC/B,MAAM,yBAAyB;AAC/B,MAAM,wBAAwB;AAE9B,MAAM,qBAAqB,oBAAI,IAAI,CAAC,kBAAkB,CAAC;",
+  "names": []
+}
