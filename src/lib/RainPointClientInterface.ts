@@ -19,6 +19,7 @@ export interface NormalizedZoneDps {
     manualTimer: number;
     manualSwitch: number;
     remainTime: number;
+    flow: number;
 }
 
 export interface NormalizedDevice {
@@ -37,6 +38,7 @@ export interface NormalizedDevice {
     nodeId?: string;
     zoneSwitchDps?: number[];
     zoneDps?: NormalizedZoneDps[];
+    batteryDp?: number;
 }
 
 export interface NormalizedZoneStatus {
@@ -44,6 +46,9 @@ export interface NormalizedZoneStatus {
     name: string;
     isOn: boolean;
     remainingDuration: number;
+    lastWaterUsage: number | null;
+    workStatus: number | null;
+    workStatusText: string;
 }
 
 export interface NormalizedDeviceStatus {
@@ -53,6 +58,7 @@ export interface NormalizedDeviceStatus {
     moisture: number | null;
     temperature: number | null;
     battery: number | null;
+    batteryState: string | null;
 }
 
 export interface NormalizedHome {

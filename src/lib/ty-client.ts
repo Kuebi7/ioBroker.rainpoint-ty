@@ -22,6 +22,7 @@ import {
     DEVICE_TYPE_IRRIGATION,
     SOCKET_PRODUCT_IDS,
 } from './constants';
+import { dpValue, mapBattery, mapWorkStatus, parseNumberDp } from './status-map';
 
 const APP_KEY = 'u9hs9dxd7cpcnj5ewcak';
 const APP_SECRET = '5r4deyaxxdktnd4gxtn3vuatuvvgeprm';
@@ -823,11 +824,21 @@ export class RainPointTyClient implements RainPointClient {
             if (zones.length === 0) {
                 continue;
             }
+            const batteryProp = props.find(
+                p =>
+                    p.code === 'BatteryCapacity' ||
+                    p.code === 'battery_percentage' ||
+                    p.code === 'residual_electricity',
+            );
+            if (batteryProp) {
+                device.batteryDp = batteryProp.abilityId;
+            }
             device.zoneDps = zones.map(z => ({
                 workStatus: z.byCode.WorkStatus ?? z.byCode.ManualSwitch ?? 0,
                 manualTimer: z.byCode.ManualTimer ?? 0,
                 manualSwitch: z.byCode.ManualSwitch ?? 0,
                 remainTime: z.byCode.RemainTime ?? z.byCode.LeftTime ?? 0,
+                flow: z.byCode.Flow ?? z.byCode.RithtFlow ?? 0,
             }));
             // If the schema declared more zones than detectValveZones found (e.g. a
             // 2-zone product where only zone-1's dps were present in the snapshot),
@@ -874,7 +885,8 @@ export class RainPointTyClient implements RainPointClient {
 
         const zones = new Map<string, Record<string, number>>();
         for (const p of props) {
-            const code = p.code ?? '';
+            // Schema typo on 2-zone products: RithtFlow instead of RightFlow.
+            const code = p.code === 'RithtFlow' ? 'RightFlow' : (p.code ?? '');
             let prefix = '';
             let role = code;
             if (hasLeftRightZoneScheme) {
@@ -1002,8 +1014,10 @@ export class RainPointTyClient implements RainPointClient {
                         zd?.workStatus ?? (switchDps?.[port - 1] !== undefined ? switchDps[port - 1] + 2 : undefined);
                     const remainingDp =
                         zd?.remainTime ?? (switchDps?.[port - 1] !== undefined ? switchDps[port - 1] + 3 : undefined);
-                    const runValue = runDp !== undefined ? dpsMap.get(String(runDp)) : undefined;
-                    const isOn = String(runValue) === '1';
+                    const flowDp = zd?.flow || (port === 1 ? 103 : port === 2 ? 152 : undefined);
+                    const work = mapWorkStatus(
+                        dpValue(dpsMap, runDp, 'WorkStatus', 'LeftWorkStatus', 'RightWorkStatus'),
+                    );
 
                     const remainingMin = remainingDp !== undefined ? Number(dpsMap.get(String(remainingDp))) : NaN;
                     const remaining =
@@ -1012,8 +1026,11 @@ export class RainPointTyClient implements RainPointClient {
                     zones.push({
                         port,
                         name: device.portDescribe[port - 1] || `Zone ${port}`,
-                        isOn,
+                        isOn: work.isOn,
                         remainingDuration: remaining,
+                        lastWaterUsage: parseNumberDp(dpValue(dpsMap, flowDp, 'Flow', 'LeftFlow', 'RightFlow')),
+                        workStatus: work.code,
+                        workStatusText: work.text,
                     });
                 }
 
@@ -1029,12 +1046,18 @@ export class RainPointTyClient implements RainPointClient {
                     dpsMap.get('temperature') ??
                     dpsMap.get('temp_current') ??
                     null;
-                const battery =
-                    dpsMap.get('11') ??
-                    dpsMap.get('17') ??
-                    dpsMap.get('battery_percentage') ??
-                    dpsMap.get('residual_electricity') ??
-                    null;
+                const battery = mapBattery(
+                    dpValue(
+                        dpsMap,
+                        device.batteryDp,
+                        105,
+                        'BatteryCapacity',
+                        '11',
+                        '17',
+                        'battery_percentage',
+                        'residual_electricity',
+                    ),
+                );
 
                 result.set(deviceId, {
                     deviceId,
@@ -1042,7 +1065,8 @@ export class RainPointTyClient implements RainPointClient {
                     zones,
                     moisture: moisture as number | null,
                     temperature: temperature as number | null,
-                    battery: battery as number | null,
+                    battery: battery.percent,
+                    batteryState: battery.text,
                 });
             } catch (error) {
                 this.log.error('Failed to get status for device %s: %s', deviceId, error);

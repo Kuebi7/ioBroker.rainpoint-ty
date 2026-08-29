@@ -37,6 +37,7 @@ var import_node_fs = __toESM(require("node:fs"));
 var import_node_zlib = __toESM(require("node:zlib"));
 var import_url = require("url");
 var import_constants = require("./constants");
+var import_status_map = require("./status-map");
 const APP_KEY = "u9hs9dxd7cpcnj5ewcak";
 const APP_SECRET = "5r4deyaxxdktnd4gxtn3vuatuvvgeprm";
 const TTID = `sdk_international@${APP_KEY}`;
@@ -533,13 +534,20 @@ class RainPointTyClient {
       if (zones.length === 0) {
         continue;
       }
+      const batteryProp = props.find(
+        (p) => p.code === "BatteryCapacity" || p.code === "battery_percentage" || p.code === "residual_electricity"
+      );
+      if (batteryProp) {
+        device.batteryDp = batteryProp.abilityId;
+      }
       device.zoneDps = zones.map((z) => {
-        var _a2, _b2, _c, _d, _e, _f;
+        var _a2, _b2, _c, _d, _e, _f, _g, _h;
         return {
           workStatus: (_b2 = (_a2 = z.byCode.WorkStatus) != null ? _a2 : z.byCode.ManualSwitch) != null ? _b2 : 0,
           manualTimer: (_c = z.byCode.ManualTimer) != null ? _c : 0,
           manualSwitch: (_d = z.byCode.ManualSwitch) != null ? _d : 0,
-          remainTime: (_f = (_e = z.byCode.RemainTime) != null ? _e : z.byCode.LeftTime) != null ? _f : 0
+          remainTime: (_f = (_e = z.byCode.RemainTime) != null ? _e : z.byCode.LeftTime) != null ? _f : 0,
+          flow: (_h = (_g = z.byCode.Flow) != null ? _g : z.byCode.RithtFlow) != null ? _h : 0
         };
       });
       if (zones.length > device.portNumber) {
@@ -582,7 +590,7 @@ class RainPointTyClient {
     );
     const zones = /* @__PURE__ */ new Map();
     for (const p of props) {
-      const code = (_a = p.code) != null ? _a : "";
+      const code = p.code === "RithtFlow" ? "RightFlow" : (_a = p.code) != null ? _a : "";
       let prefix = "";
       let role = code;
       if (hasLeftRightZoneScheme) {
@@ -634,7 +642,7 @@ class RainPointTyClient {
     return this.request(action, data, requireSid);
   }
   async getDeviceStatuses(deviceIds) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     const result = /* @__PURE__ */ new Map();
     const devices = await this.getDevices();
     for (const deviceId of deviceIds) {
@@ -669,27 +677,44 @@ class RainPointTyClient {
           const zd = zoneDps == null ? void 0 : zoneDps[port - 1];
           const runDp = (_a = zd == null ? void 0 : zd.workStatus) != null ? _a : (switchDps == null ? void 0 : switchDps[port - 1]) !== void 0 ? switchDps[port - 1] + 2 : void 0;
           const remainingDp = (_b = zd == null ? void 0 : zd.remainTime) != null ? _b : (switchDps == null ? void 0 : switchDps[port - 1]) !== void 0 ? switchDps[port - 1] + 3 : void 0;
-          const runValue = runDp !== void 0 ? dpsMap.get(String(runDp)) : void 0;
-          const isOn = String(runValue) === "1";
+          const flowDp = (zd == null ? void 0 : zd.flow) || (port === 1 ? 103 : port === 2 ? 152 : void 0);
+          const work = (0, import_status_map.mapWorkStatus)(
+            (0, import_status_map.dpValue)(dpsMap, runDp, "WorkStatus", "LeftWorkStatus", "RightWorkStatus")
+          );
           const remainingMin = remainingDp !== void 0 ? Number(dpsMap.get(String(remainingDp))) : NaN;
           const remaining = Number.isFinite(remainingMin) && remainingMin > 0 ? Math.round(remainingMin * 60) : 0;
           zones.push({
             port,
             name: device.portDescribe[port - 1] || `Zone ${port}`,
-            isOn,
-            remainingDuration: remaining
+            isOn: work.isOn,
+            remainingDuration: remaining,
+            lastWaterUsage: (0, import_status_map.parseNumberDp)((0, import_status_map.dpValue)(dpsMap, flowDp, "Flow", "LeftFlow", "RightFlow")),
+            workStatus: work.code,
+            workStatusText: work.text
           });
         }
         const moisture = (_f = (_e = (_d = (_c = dpsMap.get("9")) != null ? _c : dpsMap.get("14")) != null ? _d : dpsMap.get("humidity")) != null ? _e : dpsMap.get("soil_humidity")) != null ? _f : null;
         const temperature = (_j = (_i = (_h = (_g = dpsMap.get("10")) != null ? _g : dpsMap.get("15")) != null ? _h : dpsMap.get("temperature")) != null ? _i : dpsMap.get("temp_current")) != null ? _j : null;
-        const battery = (_n = (_m = (_l = (_k = dpsMap.get("11")) != null ? _k : dpsMap.get("17")) != null ? _l : dpsMap.get("battery_percentage")) != null ? _m : dpsMap.get("residual_electricity")) != null ? _n : null;
+        const battery = (0, import_status_map.mapBattery)(
+          (0, import_status_map.dpValue)(
+            dpsMap,
+            device.batteryDp,
+            105,
+            "BatteryCapacity",
+            "11",
+            "17",
+            "battery_percentage",
+            "residual_electricity"
+          )
+        );
         result.set(deviceId, {
           deviceId,
           online: device.online,
           zones,
           moisture,
           temperature,
-          battery
+          battery: battery.percent,
+          batteryState: battery.text
         });
       } catch (error) {
         this.log.error("Failed to get status for device %s: %s", deviceId, error);

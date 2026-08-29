@@ -11,7 +11,7 @@ Dieser Adapter spricht die RainPoint-TY-Cloud (`*.baldrgroup.net`), nicht HomGar
 - Login bei der RainPoint-TY-Cloud (EU/Amerika)
 - Home- und Geräteerkennung (Gateway-Subgeräte)
 - Ventile pro Zone ein/aus, Laufzeit 1–60 Minuten
-- Status-Polling (online, Zone an/aus, Restzeit)
+- Status-Polling (online, Zone an/aus, Restzeit, letzter Wasserverbrauch, Batterie, Arbeitszustand)
 
 **Nicht unterstützt:** RainPoint Home / HomGar (H-Serie). WLAN-Steckdosen am Gateway werden ignoriert.
 
@@ -35,10 +35,17 @@ Konfiguration: E-Mail und Passwort des TY-Kontos, Ländervorwahl (z. B. `43`), R
 
 ```
 rainpoint-ty.0.info.connection
+rainpoint-ty.0.devices.<ventil>.battery
+rainpoint-ty.0.devices.<ventil>.batteryState
 rainpoint-ty.0.devices.<ventil>.zones.1.on
 rainpoint-ty.0.devices.<ventil>.zones.1.duration
 rainpoint-ty.0.devices.<ventil>.zones.1.remaining
+rainpoint-ty.0.devices.<ventil>.zones.1.lastWaterUsage
+rainpoint-ty.0.devices.<ventil>.zones.1.workStatus
+rainpoint-ty.0.devices.<ventil>.zones.1.workStatusText
 ```
+
+`lastWaterUsage` ist der letzte Durchlauf in Litern (eingebauter Durchflussmesser). `battery` ist 10/50/100 % aus der Geräte-Enum, `batteryState` ist `low`/`medium`/`high`. `workStatus` ist 0=Bereit, 1=Manuell, 2=Automatik, 3=Regenverzögerung.
 
 ## Entwicklung
 
@@ -51,6 +58,10 @@ npm test
 Der Cloud-Client basiert auf der TY-Implementierung von [homebridge-rainpoint](https://github.com/lukezbihlyj/homebridge-rainpoint) (Apache-2.0).
 
 ## Changelog
+
+### 0.1.1
+
+- Letzter Wasserverbrauch, Batteriezustand und Arbeitszustand
 
 ### 0.1.0
 

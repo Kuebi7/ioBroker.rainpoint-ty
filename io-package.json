@@ -1,8 +1,12 @@
 {
     "common": {
         "name": "rainpoint-ty",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "news": {
+            "0.1.1": {
+                "en": "Expose last water usage, battery level and work status from the TY cloud",
+                "de": "Letzter Wasserverbrauch, Batteriezustand und Arbeitszustand aus der TY-Cloud"
+            },
             "0.1.0": {
                 "en": "Initial release: RainPoint-TY cloud login, device discovery and valve control",
                 "de": "Erstes Release: RainPoint-TY-Cloud-Login, Geräteerkennung und Ventilsteuerung"

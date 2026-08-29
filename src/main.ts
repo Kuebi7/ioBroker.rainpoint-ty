@@ -1,6 +1,7 @@
 import { format } from 'node:util';
 import * as utils from '@iobroker/adapter-core';
 import { sanitizeId } from './lib/devices';
+import { WORK_STATUS_STATES } from './lib/status-map';
 import { RainPointTyClient } from './lib/ty-client';
 import type { Logger, NormalizedDevice, NormalizedDeviceStatus } from './lib/RainPointClientInterface';
 
@@ -224,6 +225,32 @@ class RainpointTy extends utils.Adapter {
         await this.setStateValue(`${prefix}.name`, device.name, 'text', 'Name');
         await this.setStateValue(`${prefix}.model`, device.model, 'text', 'Model');
         await this.setStateValue(`${prefix}.online`, device.online, 'indicator.reachable', 'Online', 'boolean');
+        await this.extendObjectAsync(`${prefix}.battery`, {
+            type: 'state',
+            common: {
+                name: 'Battery',
+                type: 'number',
+                role: 'value.battery',
+                read: true,
+                write: false,
+                unit: '%',
+                min: 0,
+                max: 100,
+            },
+            native: {},
+        });
+        await this.extendObjectAsync(`${prefix}.batteryState`, {
+            type: 'state',
+            common: {
+                name: 'Batteriezustand',
+                type: 'string',
+                role: 'text',
+                read: true,
+                write: false,
+                states: { low: 'low', medium: 'medium', high: 'high' },
+            },
+            native: {},
+        });
         await this.extendObjectAsync(`${prefix}.zones`, {
             type: 'channel',
             common: { name: 'Zones' },
@@ -283,6 +310,48 @@ class RainpointTy extends utils.Adapter {
             },
             native: {},
         });
+        await this.extendObjectAsync(`${prefix}.lastWaterUsage`, {
+            type: 'state',
+            common: {
+                name: `${zoneName} letzter Wasserverbrauch`,
+                type: 'number',
+                role: 'value',
+                read: true,
+                write: false,
+                unit: 'l',
+            },
+            native: {},
+        });
+        await this.extendObjectAsync(`${prefix}.workStatus`, {
+            type: 'state',
+            common: {
+                name: `${zoneName} Arbeitszustand`,
+                type: 'number',
+                role: 'value',
+                read: true,
+                write: false,
+                states: WORK_STATUS_STATES,
+            },
+            native: {},
+        });
+        await this.extendObjectAsync(`${prefix}.workStatusText`, {
+            type: 'state',
+            common: {
+                name: `${zoneName} Arbeitszustand Text`,
+                type: 'string',
+                role: 'text',
+                read: true,
+                write: false,
+                states: {
+                    idle: 'Bereit',
+                    manual: 'Manuell',
+                    auto: 'Automatik',
+                    rain_delay: 'Regenverzögerung',
+                    unknown: 'Unbekannt',
+                },
+            },
+            native: {},
+        });
         this.zoneTargets.set(`${this.namespace}.${prefix}.on`, { deviceId: device.id, port, prefix });
         const durationState = await this.getStateAsync(`${prefix}.duration`);
         if (durationState?.val == null) {
@@ -298,7 +367,10 @@ class RainpointTy extends utils.Adapter {
         const prefix = `devices.${sanitizeId(deviceId)}`;
         await this.setState(`${prefix}.online`, status.online, true);
         if (status.battery !== null) {
-            await this.setStateValue(`${prefix}.battery`, status.battery, 'value.battery', 'Battery', 'number', '%');
+            await this.setState(`${prefix}.battery`, status.battery, true);
+        }
+        if (status.batteryState !== null) {
+            await this.setState(`${prefix}.batteryState`, status.batteryState, true);
         }
         if (status.moisture !== null) {
             await this.setStateValue(
@@ -325,6 +397,9 @@ class RainpointTy extends utils.Adapter {
             await this.setState(`${zonePrefix}.on`, zone.isOn, true);
             await this.setState(`${zonePrefix}.remaining`, zone.remainingDuration, true);
             await this.setState(`${zonePrefix}.name`, zone.name, true);
+            await this.setState(`${zonePrefix}.lastWaterUsage`, zone.lastWaterUsage, true);
+            await this.setState(`${zonePrefix}.workStatus`, zone.workStatus, true);
+            await this.setState(`${zonePrefix}.workStatusText`, zone.workStatusText, true);
         }
     }
 
