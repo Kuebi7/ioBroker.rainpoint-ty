@@ -59,6 +59,9 @@ Der Cloud-Client basiert auf der TY-Implementierung von [homebridge-rainpoint](h
 
 ## Changelog
 
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22 now
+
 ### 0.1.1
 
 - Letzter Wasserverbrauch, Batteriezustand und Arbeitszustand
