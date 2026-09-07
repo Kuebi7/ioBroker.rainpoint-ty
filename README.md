@@ -67,6 +67,8 @@ Der Cloud-Client basiert auf der TY-Implementierung von [homebridge-rainpoint](h
 
 - Erstes Release: TY-Login, Geräte im Home, Ventil ein/aus
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## Lizenz
 
 MIT © Andreas
