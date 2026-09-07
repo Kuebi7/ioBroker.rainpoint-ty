@@ -1,10 +1,10 @@
 // Cloud client adapted from homebridge-rainpoint (Apache-2.0, Luke Zbihlyj).
 // MQTT push is omitted; ioBroker polls thing.m.device.dp.get instead.
-import https from 'https';
-import crypto from 'crypto';
+import https from 'node:https';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import zlib from 'node:zlib';
-import { URL } from 'url';
+import { URL } from 'node:url';
 
 import type {
     RainPointClient,
