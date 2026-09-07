@@ -59,6 +59,10 @@ Der Cloud-Client basiert auf der TY-Implementierung von [homebridge-rainpoint](h
 
 ## Changelog
 
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires admin >= 7.8.23 now.
+
 ### 0.1.1
 
 - Letzter Wasserverbrauch, Batteriezustand und Arbeitszustand
