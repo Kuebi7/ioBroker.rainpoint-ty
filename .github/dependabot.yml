@@ -9,6 +9,7 @@ updates:
           - Kuebi7
       versioning-strategy: increase
       cooldown:
+          default: 7
           default-days: 7
       ignore:
           - dependency-name: '@types/node'
@@ -22,4 +23,5 @@ updates:
       assignees:
           - Kuebi7
       cooldown:
+          default: 7
           default-days: 7
