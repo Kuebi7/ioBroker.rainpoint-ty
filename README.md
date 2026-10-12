@@ -46,6 +46,10 @@ rainpoint-ty.0.devices.<valve>.zones.1.workStatusText
 
 ## Changelog
 
+### 0.1.3
+
+- Follow-up repository checker fixes (release-script, CI, maintainer email)
+
 ### 0.1.2
 
 - Repository checker fixes (Node.js 22, current dependencies, i18n, CI)
@@ -58,8 +62,14 @@ rainpoint-ty.0.devices.<valve>.zones.1.workStatusText
 
 - Initial release: TY login, devices in the home, valve on/off
 
+Older changelogs are in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
+
 ## License
 
-MIT © Andreas
+MIT License
+
+Copyright (c) 2026 Andreas <Kuebi7@users.noreply.github.com>
+
+See the [LICENSE](./LICENSE) file.
 
 The cloud client is based on the TY implementation of [homebridge-rainpoint](https://github.com/lukezbihlyj/homebridge-rainpoint) (Apache-2.0).

@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "rainpoint-ty",
-        "version": "0.1.2",
+        "version": "0.1.3",
         "news": {
+            "0.1.3": {
+                "en": "Follow-up repository checker fixes: current release-script/testing, CI Node 24/26, maintainer email",
+                "de": "Weitere Repo-Checker-Korrekturen: aktuelles Release-Script/Testing, CI Node 24/26, Maintainer-E-Mail",
+                "ru": "Дополнительные исправления проверки репозитория: актуальные release-script/testing, CI Node 24/26, email сопровождающего",
+                "pt": "Correcoes adicionais do verificador: release-script/testing atuais, CI Node 24/26, e-mail do maintainer",
+                "nl": "Verdere repository-checker-fixes: actuele release-script/testing, CI Node 24/26, maintainer-e-mail",
+                "fr": "Corrections supplementaires du verificateur : release-script/testing actuels, CI Node 24/26, e-mail du mainteneur",
+                "it": "Ulteriori correzioni del repository checker: release-script/testing aggiornati, CI Node 24/26, email del maintainer",
+                "es": "Mas correcciones del comprobador: release-script/testing actuales, CI Node 24/26, correo del mantenedor",
+                "pl": "Kolejne poprawki repo-checkera: aktualne release-script/testing, CI Node 24/26, e-mail opiekuna",
+                "uk": "Подальші виправлення перевіряльника: актуальні release-script/testing, CI Node 24/26, email супровідника",
+                "zh-cn": "后续仓库检查修复：最新 release-script/testing、CI Node 24/26、维护者邮箱"
+            },
             "0.1.2": {
                 "en": "Repository checker fixes: Node.js 22, current admin/js-controller dependencies, i18n, CI",
                 "de": "Repo-Checker-Korrekturen: Node.js 22, aktuelle Admin/js-controller-Abhängigkeiten, i18n, CI",
@@ -69,7 +82,7 @@
             "uk": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API",
             "zh-cn": "Connect RainPoint-TY (Tuya) irrigation valves to ioBroker via the RainPoint-TY cloud API"
         },
-        "authors": ["Andreas"],
+        "authors": ["Andreas <Kuebi7@users.noreply.github.com>"],
         "keywords": ["rainpoint", "rainpoint-ty", "tuya", "irrigation", "garden", "watering"],
         "licenseInformation": {
             "license": "MIT",
