@@ -5,7 +5,12 @@
         "header": {
             "type": "header",
             "text": "RainPoint-TY",
-            "size": 2
+            "size": 2,
+            "xs": 12,
+            "sm": 12,
+            "md": 12,
+            "lg": 12,
+            "xl": 12
         },
         "sessionHint": {
             "type": "staticText",
@@ -14,7 +19,8 @@
             "xs": 12,
             "sm": 12,
             "md": 12,
-            "lg": 12
+            "lg": 12,
+            "xl": 12
         },
         "email": {
             "type": "text",
@@ -23,7 +29,8 @@
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 4,
+            "xl": 4
         },
         "password": {
             "type": "password",
@@ -32,7 +39,8 @@
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 4,
+            "xl": 4
         },
         "countryCode": {
             "type": "select",
@@ -40,31 +48,33 @@
             "help": "countryCodeHelp",
             "default": "43",
             "options": [
-                { "label": "Österreich (43)", "value": "43" },
-                { "label": "Deutschland (49)", "value": "49" },
-                { "label": "Schweiz (41)", "value": "41" },
-                { "label": "Niederlande (31)", "value": "31" },
-                { "label": "USA / Kanada (1)", "value": "1" }
+                { "label": "Austria (43)", "value": "43" },
+                { "label": "Germany (49)", "value": "49" },
+                { "label": "Switzerland (41)", "value": "41" },
+                { "label": "Netherlands (31)", "value": "31" },
+                { "label": "USA / Canada (1)", "value": "1" }
             ],
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 4,
+            "xl": 4
         },
         "region": {
             "type": "select",
             "label": "region",
             "default": "EU",
             "options": [
-                { "value": "EU", "label": "Europa" },
-                { "value": "AZ", "label": "Amerika" },
-                { "value": "IN", "label": "Indien" },
+                { "value": "EU", "label": "Europe" },
+                { "value": "AZ", "label": "America" },
+                { "value": "IN", "label": "India" },
                 { "value": "CN", "label": "China" }
             ],
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 4,
+            "xl": 4
         },
         "homeIndex": {
             "type": "number",
@@ -77,7 +87,8 @@
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 4,
+            "xl": 4
         },
         "pollInterval": {
             "type": "number",
@@ -88,7 +99,8 @@
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 4,
+            "xl": 4
         },
         "defaultDuration": {
             "type": "number",
@@ -99,7 +111,8 @@
             "xs": 12,
             "sm": 12,
             "md": 6,
-            "lg": 4
+            "lg": 4,
+            "xl": 4
         }
     }
 }

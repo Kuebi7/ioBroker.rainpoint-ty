@@ -1,6 +1,6 @@
 {
     "name": "iobroker.rainpoint-ty",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Control RainPoint-TY (Tuya) irrigation devices from ioBroker",
     "author": {
         "name": "Andreas"
@@ -21,22 +21,21 @@
         "url": "https://github.com/Kuebi7/ioBroker.rainpoint-ty.git"
     },
     "engines": {
-        "node": ">= 20"
+        "node": ">= 22"
     },
     "dependencies": {
-        "@iobroker/adapter-core": "^3.3.2"
+        "@iobroker/adapter-core": "^3.4.3"
     },
     "devDependencies": {
+        "@alcalzone/release-script": "^3.8.0",
+        "@alcalzone/release-script-plugin-iobroker": "^3.7.2",
+        "@alcalzone/release-script-plugin-license": "^3.7.0",
         "@iobroker/adapter-dev": "^1.5.0",
         "@iobroker/eslint-config": "^2.3.4",
         "@iobroker/testing": "^5.3.0",
-        "@tsconfig/node20": "^20.1.9",
+        "@tsconfig/node22": "^22.0.5",
         "@types/iobroker": "npm:@iobroker/types@^7.1.1",
-        "@types/chai": "^4.3.20",
-        "@types/mocha": "^10.0.10",
-        "@types/node": "^20.19.0",
-        "chai": "^4.5.0",
-        "mocha": "^11.7.1",
+        "@types/node": "^22.18.0",
         "rimraf": "^6.1.0",
         "source-map-support": "^0.5.21",
         "ts-node": "^10.9.2",
@@ -59,7 +58,8 @@
         "test:integration": "mocha test/integration --exit",
         "test": "npm run test:ts && npm run test:package",
         "check": "tsc --noEmit",
-        "lint": "eslint -c eslint.config.mjs ."
+        "lint": "eslint -c eslint.config.mjs .",
+        "release": "release-script"
     },
     "bugs": {
         "url": "https://github.com/Kuebi7/ioBroker.rainpoint-ty/issues"

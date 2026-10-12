@@ -1,0 +1,13 @@
+{
+    "RainPoint-TY": "RainPoint-TY",
+    "sessionHint": "每个账户只能有一个云会话。请使用单独的成员账户，以便手机应用保持登录。应用：RainPoint-TY，不是 RainPoint Home。",
+    "email": "电子邮件",
+    "password": "密码",
+    "countryCode": "国家区号",
+    "countryCodeHelp": "创建 RainPoint-TY 账户时使用的国家",
+    "region": "云区域",
+    "homeIndex": "家庭索引",
+    "homeIndexHelp": "0 = 第一个家庭（通常是共享家庭）",
+    "pollInterval": "轮询间隔（秒）",
+    "defaultDuration": "默认浇水时长（分钟）"
+}

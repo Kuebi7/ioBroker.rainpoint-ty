@@ -1,72 +1,65 @@
 # ioBroker.rainpoint-ty
 
-Unoffizieller ioBroker-Adapter für **RainPoint-TY** (Tuya-App, T-Serie).
+Unofficial ioBroker adapter for **RainPoint-TY** (Tuya app, T-series).
 
-Dieser Adapter spricht die RainPoint-TY-Cloud (`*.baldrgroup.net`), nicht HomGar / RainPoint Home. Für H-Serie und die App **RainPoint** (ohne TY) den Adapter `iobroker.rainpoint` verwenden.
+This adapter talks to the RainPoint-TY cloud (`*.baldrgroup.net`), not HomGar / RainPoint Home. Use `iobroker.rainpoint` for H-series devices and the **RainPoint** app (without TY).
 
-> Nicht von RainPoint oder Tuya.
+> Not affiliated with RainPoint or Tuya.
 
 ## Features
 
-- Login bei der RainPoint-TY-Cloud (EU/Amerika)
-- Home- und Geräteerkennung (Gateway-Subgeräte)
-- Ventile pro Zone ein/aus, Laufzeit 1–60 Minuten
-- Status-Polling (online, Zone an/aus, Restzeit, letzter Wasserverbrauch, Batterie, Arbeitszustand)
+- Login to the RainPoint-TY cloud (EU / America)
+- Home and device discovery (gateway sub-devices)
+- Per-zone valve on/off, runtime 1-60 minutes
+- Status polling (online, zone on/off, remaining time, last water usage, battery, work status)
 
-**Nicht unterstützt:** RainPoint Home / HomGar (H-Serie). WLAN-Steckdosen am Gateway werden ignoriert.
+**Not supported:** RainPoint Home / HomGar (H-series). Wi-Fi sockets on the gateway are ignored.
 
-## Voraussetzungen
+## Prerequisites
 
-- ioBroker mit js-controller 5 oder neuer
-- Node.js 20 oder neuer
-- Konto der **RainPoint-TY**-App
-- Freigabe: Extra-Konto als Mitglied mit Steuerrecht, oder dasselbe Konto (dann wird die App abgemeldet)
+- ioBroker with js-controller 6 or newer
+- Node.js 22 or newer
+- A **RainPoint-TY** app account
+- Recommended: a dedicated member account with control rights, so the phone app stays logged in
 
-## Installation
+## Configuration
 
-```bash
-iobroker url https://github.com/Kuebi7/ioBroker.rainpoint-ty/tarball/main
-iobroker add rainpoint-ty
-```
+Set the TY account email and password, country calling code (for example `43`), region `EU`, and home index `0` for the first or shared home.
 
-Konfiguration: E-Mail und Passwort des TY-Kontos, Ländervorwahl (z. B. `43`), Region `EU`, Home-Index `0` für das erste/geteilte Home.
+RainPoint-TY allows only one cloud session per account. Using the same account as the phone app will log the app out.
 
 ## States
 
 ```
 rainpoint-ty.0.info.connection
-rainpoint-ty.0.devices.<ventil>.battery
-rainpoint-ty.0.devices.<ventil>.batteryState
-rainpoint-ty.0.devices.<ventil>.zones.1.on
-rainpoint-ty.0.devices.<ventil>.zones.1.duration
-rainpoint-ty.0.devices.<ventil>.zones.1.remaining
-rainpoint-ty.0.devices.<ventil>.zones.1.lastWaterUsage
-rainpoint-ty.0.devices.<ventil>.zones.1.workStatus
-rainpoint-ty.0.devices.<ventil>.zones.1.workStatusText
+rainpoint-ty.0.devices.<valve>.battery
+rainpoint-ty.0.devices.<valve>.batteryState
+rainpoint-ty.0.devices.<valve>.zones.1.on
+rainpoint-ty.0.devices.<valve>.zones.1.duration
+rainpoint-ty.0.devices.<valve>.zones.1.remaining
+rainpoint-ty.0.devices.<valve>.zones.1.lastWaterUsage
+rainpoint-ty.0.devices.<valve>.zones.1.workStatus
+rainpoint-ty.0.devices.<valve>.zones.1.workStatusText
 ```
 
-`lastWaterUsage` ist der letzte Durchlauf in Litern (eingebauter Durchflussmesser). `battery` ist 10/50/100 % aus der Geräte-Enum, `batteryState` ist `low`/`medium`/`high`. `workStatus` ist 0=Bereit, 1=Manuell, 2=Automatik, 3=Regenverzögerung.
-
-## Entwicklung
-
-```bash
-npm install
-npm run build
-npm test
-```
-
-Der Cloud-Client basiert auf der TY-Implementierung von [homebridge-rainpoint](https://github.com/lukezbihlyj/homebridge-rainpoint) (Apache-2.0).
+`lastWaterUsage` is the last run in liters (built-in flow meter). `battery` is 10/50/100 % from the device enum, `batteryState` is `low` / `medium` / `high`. `workStatus` is 0=idle, 1=manual, 2=auto, 3=rain delay.
 
 ## Changelog
 
+### 0.1.2
+
+- Repository checker fixes (Node.js 22, current dependencies, i18n, CI)
+
 ### 0.1.1
 
-- Letzter Wasserverbrauch, Batteriezustand und Arbeitszustand
+- Last water usage, battery level and work status
 
 ### 0.1.0
 
-- Erstes Release: TY-Login, Geräte im Home, Ventil ein/aus
+- Initial release: TY login, devices in the home, valve on/off
 
-## Lizenz
+## License
 
 MIT © Andreas
+
+The cloud client is based on the TY implementation of [homebridge-rainpoint](https://github.com/lukezbihlyj/homebridge-rainpoint) (Apache-2.0).

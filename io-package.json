@@ -1,15 +1,46 @@
 {
     "common": {
         "name": "rainpoint-ty",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "news": {
+            "0.1.2": {
+                "en": "Repository checker fixes: Node.js 22, current admin/js-controller dependencies, i18n, CI",
+                "de": "Repo-Checker-Korrekturen: Node.js 22, aktuelle Admin/js-controller-Abhängigkeiten, i18n, CI",
+                "ru": "Исправления проверки репозитория: Node.js 22, актуальные зависимости admin/js-controller, i18n, CI",
+                "pt": "Correções do verificador do repositório: Node.js 22, dependências atuais de admin/js-controller, i18n, CI",
+                "nl": "Repository-checker-fixes: Node.js 22, actuele admin/js-controller-afhankelijkheden, i18n, CI",
+                "fr": "Corrections du vérificateur de dépôt : Node.js 22, dépendances admin/js-controller actuelles, i18n, CI",
+                "it": "Correzioni del repository checker: Node.js 22, dipendenze admin/js-controller aggiornate, i18n, CI",
+                "es": "Correcciones del comprobador del repositorio: Node.js 22, dependencias actuales de admin/js-controller, i18n, CI",
+                "pl": "Poprawki repo-checkera: Node.js 22, aktualne zależności admin/js-controller, i18n, CI",
+                "uk": "Виправлення перевіряльника репозиторію: Node.js 22, актуальні залежності admin/js-controller, i18n, CI",
+                "zh-cn": "仓库检查修复：Node.js 22、最新 admin/js-controller 依赖、i18n、CI"
+            },
             "0.1.1": {
                 "en": "Expose last water usage, battery level and work status from the TY cloud",
-                "de": "Letzter Wasserverbrauch, Batteriezustand und Arbeitszustand aus der TY-Cloud"
+                "de": "Letzter Wasserverbrauch, Batteriezustand und Arbeitszustand aus der TY-Cloud",
+                "ru": "Показ последнего расхода воды, уровня батареи и рабочего состояния из облака TY",
+                "pt": "Expor o último consumo de água, nível da bateria e estado de trabalho da nuvem TY",
+                "nl": "Laatste waterverbruik, batterijniveau en werkstatus uit de TY-cloud tonen",
+                "fr": "Afficher la dernière consommation d'eau, le niveau de batterie et l'état de fonctionnement depuis le cloud TY",
+                "it": "Mostra l'ultimo consumo d'acqua, il livello della batteria e lo stato di lavoro dal cloud TY",
+                "es": "Mostrar el último consumo de agua, el nivel de batería y el estado de trabajo desde la nube TY",
+                "pl": "Udostępnienie ostatniego zużycia wody, poziomu baterii i statusu pracy z chmury TY",
+                "uk": "Показ останнього споживання води, рівня батареї та робочого стану з хмари TY",
+                "zh-cn": "从 TY 云读取上次用水量、电池电量和工作状态"
             },
             "0.1.0": {
                 "en": "Initial release: RainPoint-TY cloud login, device discovery and valve control",
-                "de": "Erstes Release: RainPoint-TY-Cloud-Login, Geräteerkennung und Ventilsteuerung"
+                "de": "Erstes Release: RainPoint-TY-Cloud-Login, Geräteerkennung und Ventilsteuerung",
+                "ru": "Первый выпуск: вход в облако RainPoint-TY, обнаружение устройств и управление клапанами",
+                "pt": "Lançamento inicial: login na nuvem RainPoint-TY, descoberta de dispositivos e controlo de válvulas",
+                "nl": "Eerste release: RainPoint-TY-cloudlogin, apparaatdetectie en klepbesturing",
+                "fr": "Version initiale : connexion cloud RainPoint-TY, découverte des appareils et commande des vannes",
+                "it": "Prima versione: accesso al cloud RainPoint-TY, rilevamento dispositivi e controllo valvole",
+                "es": "Primera versión: inicio de sesión en la nube RainPoint-TY, descubrimiento de dispositivos y control de válvulas",
+                "pl": "Pierwsze wydanie: logowanie do chmury RainPoint-TY, wykrywanie urządzeń i sterowanie zaworami",
+                "uk": "Перший випуск: вхід у хмару RainPoint-TY, виявлення пристроїв і керування клапанами",
+                "zh-cn": "首次发布：RainPoint-TY 云登录、设备发现和阀门控制"
             }
         },
         "titleLang": {
@@ -66,12 +97,12 @@
         },
         "dependencies": [
             {
-                "js-controller": ">=5.0.19"
+                "js-controller": ">=6.0.11"
             }
         ],
         "globalDependencies": [
             {
-                "admin": ">=6.17.12"
+                "admin": ">=7.6.20"
             }
         ]
     },

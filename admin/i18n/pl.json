@@ -1,0 +1,13 @@
+{
+    "RainPoint-TY": "RainPoint-TY",
+    "sessionHint": "Tylko jedna sesja w chmurze na konto. Uzyj dedykowanego konta czlonka, aby aplikacja w telefonie pozostala zalogowana. Aplikacja: RainPoint-TY, nie RainPoint Home.",
+    "email": "E-mail",
+    "password": "Haslo",
+    "countryCode": "Numer kierunkowy kraju",
+    "countryCodeHelp": "Kraj uzyty przy tworzeniu konta RainPoint-TY",
+    "region": "Region chmury",
+    "homeIndex": "Indeks domu",
+    "homeIndexHelp": "0 = pierwszy dom (czesto wspolny dom)",
+    "pollInterval": "Interwal odpytywania (sekundy)",
+    "defaultDuration": "Domyslny czas podlewania (minuty)"
+}

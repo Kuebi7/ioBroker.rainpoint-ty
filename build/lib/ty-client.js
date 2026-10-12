@@ -31,11 +31,11 @@ __export(ty_client_exports, {
   RainPointTyClient: () => RainPointTyClient
 });
 module.exports = __toCommonJS(ty_client_exports);
-var import_https = __toESM(require("https"));
-var import_crypto = __toESM(require("crypto"));
+var import_node_https = __toESM(require("node:https"));
+var import_node_crypto = __toESM(require("node:crypto"));
 var import_node_fs = __toESM(require("node:fs"));
 var import_node_zlib = __toESM(require("node:zlib"));
-var import_url = require("url");
+var import_node_url = require("node:url");
 var import_constants = require("./constants");
 var import_status_map = require("./status-map");
 const APP_KEY = "u9hs9dxd7cpcnj5ewcak";
@@ -82,7 +82,7 @@ const REGION_ENDPOINTS = {
 };
 const DEFAULT_MQTT_PORT = 8883;
 function md5(data) {
-  return import_crypto.default.createHash("md5").update(data, "utf8").digest("hex");
+  return import_node_crypto.default.createHash("md5").update(data, "utf8").digest("hex");
 }
 function mobileHash(data) {
   const pre = md5(data);
@@ -110,12 +110,12 @@ function formUrlEncode(params) {
 }
 function deriveEncryptoKey(requestId, ecode) {
   const keyString = ecode ? `${HMAC_KEY}_${ecode}` : HMAC_KEY;
-  const hash = import_crypto.default.createHmac("sha256", requestId).update(keyString, "utf8").digest("hex");
+  const hash = import_node_crypto.default.createHmac("sha256", requestId).update(keyString, "utf8").digest("hex");
   return Buffer.from(hash.substring(0, 16), "ascii");
 }
 function aesGcmEncryptBase64(key, plaintext) {
-  const iv = import_crypto.default.randomBytes(12);
-  const cipher = import_crypto.default.createCipheriv("aes-128-gcm", key, iv);
+  const iv = import_node_crypto.default.randomBytes(12);
+  const cipher = import_node_crypto.default.createCipheriv("aes-128-gcm", key, iv);
   const ct = Buffer.concat([cipher.update(plaintext, "utf8"), cipher.final()]);
   const tag = cipher.getAuthTag();
   return Buffer.concat([iv, ct, tag]).toString("base64");
@@ -125,7 +125,7 @@ function aesGcmDecryptBase64(key, b64) {
   const iv = raw.subarray(0, 12);
   const tag = raw.subarray(raw.length - 16);
   const ct = raw.subarray(12, raw.length - 16);
-  const decipher = import_crypto.default.createDecipheriv("aes-128-gcm", key, iv);
+  const decipher = import_node_crypto.default.createDecipheriv("aes-128-gcm", key, iv);
   decipher.setAuthTag(tag);
   let decrypted = Buffer.concat([decipher.update(ct), decipher.final()]);
   if (decrypted.length >= 2 && decrypted[0] === 31 && decrypted[1] === 139) {
@@ -954,7 +954,7 @@ class RainPointTyClient {
     const needsSid = requireSid !== false;
     const d = /* @__PURE__ */ new Date();
     const postDataStr = JSON.stringify(data);
-    const requestId = import_crypto.default.randomUUID();
+    const requestId = import_node_crypto.default.randomUUID();
     this.log.debug("[TY] plaintext postData for %s: %s", action, postDataStr);
     const ecode = requireSid === false ? void 0 : this.ecode || void 0;
     const encKey = deriveEncryptoKey(requestId, ecode);
@@ -1016,7 +1016,7 @@ class RainPointTyClient {
       }
       strToSign += `${key}=${signMap[key]}`;
     }
-    const sign = import_crypto.default.createHmac("sha256", HMAC_KEY).update(strToSign).digest("hex");
+    const sign = import_node_crypto.default.createHmac("sha256", HMAC_KEY).update(strToSign).digest("hex");
     const bodyParams = {
       postData: encryptedPostData,
       // ENCRYPTED base64 in body
@@ -1052,7 +1052,7 @@ class RainPointTyClient {
       bodyParams.sid = this.sid;
     }
     const bodyStr = formUrlEncode(bodyParams);
-    const urlObj = new import_url.URL(this.endpoint);
+    const urlObj = new import_node_url.URL(this.endpoint);
     this.log.debug("[TY] POST %s", this.endpoint);
     this.log.debug("[TY] sign string: %s", strToSign);
     this.log.debug("[TY] body: %s", bodyStr);
@@ -1080,7 +1080,7 @@ class RainPointTyClient {
         },
         rejectUnauthorized: false
       };
-      const req = import_https.default.request(options, (res) => {
+      const req = import_node_https.default.request(options, (res) => {
         let responseData = "";
         res.on("data", (chunk) => {
           responseData += chunk;

@@ -1,0 +1,13 @@
+{
+    "RainPoint-TY": "RainPoint-TY",
+    "sessionHint": "Apenas uma sessao na nuvem por conta. Use uma conta de membro dedicada para a app do telefone permanecer ligada. App: RainPoint-TY, nao RainPoint Home.",
+    "email": "E-mail",
+    "password": "Palavra-passe",
+    "countryCode": "Indicativo do pais",
+    "countryCodeHelp": "Pais usado na criacao da conta RainPoint-TY",
+    "region": "Regiao da nuvem",
+    "homeIndex": "Indice da casa",
+    "homeIndexHelp": "0 = primeira casa (muitas vezes a casa partilhada)",
+    "pollInterval": "Intervalo de consulta (segundos)",
+    "defaultDuration": "Duracao de rega predefinida (minutos)"
+}

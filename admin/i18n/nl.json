@@ -1,0 +1,13 @@
+{
+    "RainPoint-TY": "RainPoint-TY",
+    "sessionHint": "Slechts een cloudsessie per account. Gebruik een extra lidaccount zodat de telefoon-app ingelogd blijft. App: RainPoint-TY, niet RainPoint Home.",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "countryCode": "Landcode",
+    "countryCodeHelp": "Land dat bij het aanmaken van het RainPoint-TY-account is gebruikt",
+    "region": "Cloudregio",
+    "homeIndex": "Home-index",
+    "homeIndexHelp": "0 = eerste home (vaak het gedeelde home)",
+    "pollInterval": "Poll-interval (seconden)",
+    "defaultDuration": "Standaard bewateringsduur (minuten)"
+}
