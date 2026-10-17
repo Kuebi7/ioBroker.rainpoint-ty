@@ -3,7 +3,8 @@ updates:
     - package-ecosystem: npm
       directory: '/'
       schedule:
-          interval: monthly
+          interval: cron
+          cronjob: '17 4 * * 2'
       open-pull-requests-limit: 15
       assignees:
           - Kuebi7
@@ -14,11 +15,14 @@ updates:
       ignore:
           - dependency-name: '@types/node'
             update-types: ['version-update:semver-major']
+          - dependency-name: typescript
+            update-types: ['version-update:semver-major']
 
     - package-ecosystem: github-actions
       directory: '/'
       schedule:
-          interval: monthly
+          interval: cron
+          cronjob: '43 13 * * 4'
       open-pull-requests-limit: 15
       assignees:
           - Kuebi7
