@@ -33,7 +33,9 @@ jobs:
                 node-version: [22.x, 24.x, 26.x]
                 os: [ubuntu-latest, windows-latest, macos-latest]
         steps:
-            - uses: ioBroker/testing-action-adapter@v2
+            # testing-action-adapter has no v2 tag (latest is v1). @v2 aborts the job
+            # before npm run test:integration, so the checker never sees the expected log lines.
+            - uses: ioBroker/testing-action-adapter@v1
               with:
                   node-version: ${{ matrix.node-version }}
                   os: ${{ matrix.os }}
@@ -51,7 +53,8 @@ jobs:
             id-token: write
             contents: write
         steps:
-            - uses: ioBroker/testing-action-deploy@v2
+            # testing-action-deploy is also still on major v1.
+            - uses: ioBroker/testing-action-deploy@v1
               with:
                   node-version: '24.x'
                   build: true
